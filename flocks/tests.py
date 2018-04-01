@@ -110,6 +110,26 @@ class FlockTests(TestCase):
         self.assertEqual(None, flock.computed_daily_growth)
 
 
+class MultipleFlockTest(TestCase):
+
+    def setUp(self):
+        self.flock1 = Flock(entry_date=datetime.date(2017, 1, 1), entry_weight=2600, number_of_animals=130)
+        self.flock1.save()
+        exit_date = datetime.date(2017, 4, 1)
+        farm_animal_exit = AnimalFarmExit(date=exit_date)
+        farm_animal_exit.save()
+        self.exit1 = self.flock1.animalflockexit_set.create(farm_exit=farm_animal_exit,
+                                                            number_of_animals=130,
+                                                            weight=13000)
+        self.flock2 = Flock(entry_date=datetime.date(2017, 2, 1), entry_weight=2600, number_of_animals=130)
+        self.flock2.save()
+
+    def test_get_on_farm(self):
+        flocks = Flock.objects.present_at_farm()
+        self.assertEqual(1, len(flocks))
+        self.assertEqual(self.flock2.id, flocks[0].id)
+
+
 class SeparationTests(TestCase):
 
     def setUp(self):

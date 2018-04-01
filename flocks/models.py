@@ -1,7 +1,4 @@
 from django.db import models
-
-# Create your models here.
-from django.db import models
 from django.db.models import Sum
 from django.utils.dateparse import parse_date
 
@@ -50,7 +47,6 @@ class Flock(models.Model):
     entry_weight = models.FloatField()
     number_of_animals = models.IntegerField()
     objects = CurrentFlocksManager()
-    # alive = CurrentFlocksManager()
 
     @property
     def flock_name(self):
