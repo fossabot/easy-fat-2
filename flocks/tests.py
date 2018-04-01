@@ -108,7 +108,7 @@ class FlockTests(TestCase):
         flock = Flock(entry_date=entry_date, entry_weight=20.00, number_of_animals=2)
         flock.save()
         self.assertEqual(None, flock.computed_daily_growth)
-
+    
     def test_average_exit_weight_single_exit(self):
         exit_date = self.flock1.entry_date + datetime.timedelta(days=100)
         farm_animal_exit = AnimalFarmExit(date=exit_date)
@@ -136,6 +136,36 @@ class FlockTests(TestCase):
 
     def test_average_exit_weight_no_exit(self):
         self.assertAlmostEqual(0, self.flock1.average_exit_weight)
+
+    def test_death_percentage(self):
+        exit_date = datetime.date(2017, 1, 10)
+        self.flock1.animaldeath_set.create(date=exit_date, weight=26.00)
+        self.flock1.animaldeath_set.create(date=exit_date, weight=26.00)
+        self.assertAlmostEqual(1.538, self.flock1.death_percentage, 3)
+
+
+class MultipleFlockTest(TestCase):
+
+    def setUp(self):
+        self.flock1 = Flock(entry_date=datetime.date(2017, 1, 1), entry_weight=2600, number_of_animals=130)
+        self.flock1.save()
+        exit_date = datetime.date(2017, 4, 1)
+        farm_animal_exit = AnimalFarmExit(date=exit_date)
+        farm_animal_exit.save()
+        self.exit1 = self.flock1.animalflockexit_set.create(farm_exit=farm_animal_exit,
+                                                            number_of_animals=130,
+                                                            weight=13000)
+        self.flock2 = Flock(entry_date=datetime.date(2017, 2, 1), entry_weight=2600, number_of_animals=130)
+        self.flock2.save()
+
+    def test_get_on_farm(self):
+        flocks = Flock.objects.present_at_farm()
+        self.assertEqual(1, len(flocks))
+        self.assertEqual(self.flock2.id, flocks[0].id)
+
+    def test_expected_exit_date(self):
+        expected_exit_date = datetime.date(2017, 5, 19)
+        self.assertEqual(expected_exit_date, self.flock2.expected_exit_date)
 
 class SeparationTests(TestCase):
 
