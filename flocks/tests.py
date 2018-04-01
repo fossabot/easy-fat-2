@@ -109,6 +109,33 @@ class FlockTests(TestCase):
         flock.save()
         self.assertEqual(None, flock.computed_daily_growth)
 
+    def test_average_exit_weight_single_exit(self):
+        exit_date = self.flock1.entry_date + datetime.timedelta(days=100)
+        farm_animal_exit = AnimalFarmExit(date=exit_date)
+        farm_animal_exit.save()
+        flock_exit = self.flock1.animalflockexit_set.create(farm_exit=farm_animal_exit,
+                                                            number_of_animals=1,
+                                                            weight=110)
+        flock_exit.save()
+        self.assertAlmostEqual(110, self.flock1.average_exit_weight)
+
+    def test_average_exit_weight_dual_exit(self):
+        exit_date = self.flock1.entry_date + datetime.timedelta(days=100)
+        farm_animal_exit = AnimalFarmExit(date=exit_date)
+        farm_animal_exit.save()
+
+        flock_exit = self.flock1.animalflockexit_set.create(farm_exit=farm_animal_exit,
+                                                            number_of_animals=1,
+                                                            weight=110)
+        flock_exit.save()
+        flock_exit = self.flock1.animalflockexit_set.create(farm_exit=farm_animal_exit,
+                                                            number_of_animals=1,
+                                                            weight=160)
+        flock_exit.save()
+        self.assertAlmostEqual(135, self.flock1.average_exit_weight)
+
+    def test_average_exit_weight_no_exit(self):
+        self.assertAlmostEqual(0, self.flock1.average_exit_weight)
 
 class SeparationTests(TestCase):
 
