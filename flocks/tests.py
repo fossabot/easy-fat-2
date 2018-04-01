@@ -59,6 +59,7 @@ class FlockTests(TestCase):
         self.flock1.animaldeath_set.create(date=exit_date, weight=26.00)
         self.flock1.animaldeath_set.create(date=exit_date, weight=26.00)
         self.assertEqual(128, self.flock1.number_of_living_animals)
+        self.assertAlmostEqual(1.538, self.flock1.death_percentage, 3)
 
     def test_flock_average_grow_single_exit(self):
         exit_date = self.flock1.entry_date + datetime.timedelta(days=100)
