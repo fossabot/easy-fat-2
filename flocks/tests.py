@@ -108,6 +108,34 @@ class FlockTests(TestCase):
         flock = Flock(entry_date=entry_date, entry_weight=20.00, number_of_animals=2)
         flock.save()
         self.assertEqual(None, flock.computed_daily_growth)
+    
+    def test_average_exit_weight_single_exit(self):
+        exit_date = self.flock1.entry_date + datetime.timedelta(days=100)
+        farm_animal_exit = AnimalFarmExit(date=exit_date)
+        farm_animal_exit.save()
+        flock_exit = self.flock1.animalflockexit_set.create(farm_exit=farm_animal_exit,
+                                                            number_of_animals=1,
+                                                            weight=110)
+        flock_exit.save()
+        self.assertAlmostEqual(110, self.flock1.average_exit_weight)
+
+    def test_average_exit_weight_dual_exit(self):
+        exit_date = self.flock1.entry_date + datetime.timedelta(days=100)
+        farm_animal_exit = AnimalFarmExit(date=exit_date)
+        farm_animal_exit.save()
+
+        flock_exit = self.flock1.animalflockexit_set.create(farm_exit=farm_animal_exit,
+                                                            number_of_animals=1,
+                                                            weight=110)
+        flock_exit.save()
+        flock_exit = self.flock1.animalflockexit_set.create(farm_exit=farm_animal_exit,
+                                                            number_of_animals=1,
+                                                            weight=160)
+        flock_exit.save()
+        self.assertAlmostEqual(135, self.flock1.average_exit_weight)
+
+    def test_average_exit_weight_no_exit(self):
+        self.assertAlmostEqual(0, self.flock1.average_exit_weight)
 
     def test_death_percentage(self):
         exit_date = datetime.date(2017, 1, 10)
@@ -138,7 +166,6 @@ class MultipleFlockTest(TestCase):
     def test_expected_exit_date(self):
         expected_exit_date = datetime.date(2017, 5, 19)
         self.assertEqual(expected_exit_date, self.flock2.expected_exit_date)
-
 
 class SeparationTests(TestCase):
 
