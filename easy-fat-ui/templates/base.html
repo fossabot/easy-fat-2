@@ -1,0 +1,92 @@
+{% load i18n %}
+{% load l10n %}
+{% load static %}
+{% get_current_language as LANGUAGE_CODE %}
+
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>{% block title %}Chácara Ventania{% endblock %}</title>
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="static/dashboard.css" />
+    <link rel="shortcut icon" type="image/png" href="{% static 'porco.png' %}"/>
+</head>
+
+<nav class="navbar navbar-easyfat-dark navbar-expand sticky-top flex-md-nowrap p-0">
+
+    <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="{% url 'farm:index' %}"><img src="{% static 'porco.png' %}" style="width: 40px;"/> EasyFat</a>
+    <div id="navbar" class="navbar-collapse collapse">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item"><a class="nav-link" href="#"><span class="glyphicon glyphicon-cog"></span> Settings</a></li>
+            <li class="nav-item"><a class="nav-link" href="#"><span class="glyphicon glyphicon-user"></span> Profile {{ LANGUAGE_CODE }} </a></li>
+            <li class="nav-item"><a class="nav-link" href="#"><span class="glyphicon glyphicon-question-sign"></span> Help</a>
+            <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-expanded="false">Actions</a>
+                <div class="dropdown-menu dropdown-menu-right">
+                    <a class="dropdown-item" href="#">{% trans 'New Flock' %}</a>
+                    <a class="dropdown-item" href="#">{% trans 'New Separation' %}</a>
+                    <a class="dropdown-item" href="#">{% trans 'New Group Exit' %}</a>
+                    <a class="dropdown-item" href="#">{% trans 'New Single Exit' %}</a>
+                    <a class="dropdown-item" href="#">{% trans 'New Death' %}</a>
+                    <a class="dropdown-item" href="#">{% trans 'New Transfer' %}</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="#">{% trans 'New Feed Delivery' %}</a>
+                    <a class="dropdown-item" href="#">{% trans 'New Feeding Transition' %}</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="#">{% trans 'New Treatment' %}</a>
+                    <a class="dropdown-item disabled" href="test">{% trans 'New Medication Application' %}</a>
+                </div>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+
+<div class="container-fluid">
+    <div class="row">
+        <nav class="col-md-2 d-none d-md-block bg-easyfat-light sidebar">
+            <div class="sidebar-sticky">
+                <ul class="flex-md-column flex-row navbar-nav justify-content-between">
+                    <li class="nav-item"><a class="nav-link active" href="#">{% trans 'Farm Overview' %} <span class="sr-only">(current)</span></a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">{% trans 'Flocks' %}</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">{% trans 'Feeding' %}</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">{% trans 'Health' %}</a></li>
+                    <li class="nav-item"><a class="nav-link" href="">{% trans 'Financial' %}</a> </li>
+                    <li class="nav-item"><a class="nav-link" href="#">{% trans 'Buildings' %}</a></li>
+                </ul>
+                <ul class="flex-md-column flex-row navbar-nav justify-content-between">
+                    <li class="nav-item"><a class="nav-link disabled" href="">{% trans 'Reports' %}</a></li>
+                </ul>
+            </div>
+        </nav>
+
+        <main class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item" aria-current="page">{% trans 'Dashboard' %}</li>
+                    <li class="breadcrumb-item active" aria-current="page">{% trans 'Farm Dashboard' %}</li>
+                </ol>
+            </nav>
+            {% block main_content %}
+            {% endblock %}
+        </main>
+        <footer class="footer">
+            <div class="mr">
+                <p class="text-muted">EasyFat v0.2.5</p>
+            </div>
+        </footer>
+    </div>
+</div>
+
+
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+</body>
