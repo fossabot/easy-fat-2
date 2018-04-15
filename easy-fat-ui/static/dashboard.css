@@ -28,9 +28,15 @@
     position: sticky;
     top: 48px;
     height: calc(100vh - 48px);
-    padding-top: .5rem;
+    padding-top: 2rem;
     overflow-x: hidden;
     overflow-y: auto;
+}
+
+.navbar-nav .nav-link {
+    padding-left: 15px;
+    padding-bottom: 12px;
+    padding-top: 12px;
 }
 
 .footer {

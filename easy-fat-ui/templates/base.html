@@ -16,6 +16,7 @@
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" />
     <link rel="stylesheet" type="text/css" href="static/dashboard.css" />
     <link rel="shortcut icon" type="image/png" href="{% static 'porco.png' %}"/>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css" integrity="sha384-+d0P83n9kaQMCwj8F4RJB66tzIwOKmrdb46+porD/OvrJ+37WqIM7UoBtwHO6Nlg" crossorigin="anonymous">
 </head>
 
 <nav class="navbar navbar-easyfat-dark navbar-expand sticky-top flex-md-nowrap p-0">
@@ -23,23 +24,23 @@
     <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="{% url 'farm:index' %}"><img src="{% static 'porco.png' %}" style="width: 40px;"/> EasyFat</a>
     <div id="navbar" class="navbar-collapse collapse">
         <ul class="navbar-nav ml-auto">
-            <li class="nav-item"><a class="nav-link" href="#"><span class="glyphicon glyphicon-cog"></span> Settings</a></li>
-            <li class="nav-item"><a class="nav-link" href="#"><span class="glyphicon glyphicon-user"></span> Profile {{ LANGUAGE_CODE }} </a></li>
-            <li class="nav-item"><a class="nav-link" href="#"><span class="glyphicon glyphicon-question-sign"></span> Help</a>
+{#            <li class="nav-item"><a class="nav-link" href="#"><span class="fas fa-cog"></span> Settings</a></li>#}
+{#            <li class="nav-item"><a class="nav-link" href="#"><span class="fas fa-user"></span> Profile {{ LANGUAGE_CODE }} </a></li>#}
+{#            <li class="nav-item"><a class="nav-link" href="#"><span class="fas fa-question-circle"></span> Help</a>#}
             <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-expanded="false">Actions</a>
                 <div class="dropdown-menu dropdown-menu-right">
-                    <a class="dropdown-item" href="#">{% trans 'New Flock' %}</a>
-                    <a class="dropdown-item" href="#">{% trans 'New Separation' %}</a>
-                    <a class="dropdown-item" href="#">{% trans 'New Group Exit' %}</a>
-                    <a class="dropdown-item" href="#">{% trans 'New Single Exit' %}</a>
-                    <a class="dropdown-item" href="#">{% trans 'New Death' %}</a>
-                    <a class="dropdown-item" href="#">{% trans 'New Transfer' %}</a>
+                    <a class="dropdown-item" href="#"><span class="fas fa-piggy-bank fa-fw"></span> {% trans 'New Flock' %}</a>
+                    <a class="dropdown-item" href="#"><span class="fas fa-code-branch fa-fw"></span> {% trans 'New Separation' %}</a>
+                    <a class="dropdown-item" href="#"><span class="fas fa-truck-moving fa-fw"></span> {% trans 'New Group Exit' %}</a>
+                    <a class="dropdown-item" href="#"><span class="fas fa-truck fa-fw"></span> {% trans 'New Single Exit' %}</a>
+                    <a class="dropdown-item" href="#"><span class="fas fa-ambulance fa-fw"></span> {% trans 'New Death' %}</a>
+                    <a class="dropdown-item" href="#"><span class="fas fa-exchange-alt fa-fw"></span> {% trans 'New Transfer' %}</a>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">{% trans 'New Feed Delivery' %}</a>
-                    <a class="dropdown-item" href="#">{% trans 'New Feeding Transition' %}</a>
+                    <a class="dropdown-item" href="#"><span class="fas fa-pallet fa-fw"></span> {% trans 'New Feed Delivery' %}</a>
+                    <a class="dropdown-item" href="#"><span class="fas fa-utensils fa-fw"></span> {% trans 'New Feeding Transition' %}</a>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">{% trans 'New Treatment' %}</a>
-                    <a class="dropdown-item disabled" href="test">{% trans 'New Medication Application' %}</a>
+                    <a class="dropdown-item" href="#"><span class="fas fa-prescription-bottle fa-fw"></span> {% trans 'New Treatment' %}</a>
+                    <a class="dropdown-item disabled" href="test"><span class="fas fa-syringe fa-fw"></span> {% trans 'New Medication Application' %}</a>
                 </div>
             </li>
         </ul>
@@ -52,15 +53,15 @@
         <nav class="col-md-2 d-none d-md-block bg-easyfat-light sidebar">
             <div class="sidebar-sticky">
                 <ul class="flex-md-column flex-row navbar-nav justify-content-between">
-                    <li class="nav-item"><a class="nav-link active" href="#">{% trans 'Farm Overview' %} <span class="sr-only">(current)</span></a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">{% trans 'Flocks' %}</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">{% trans 'Feeding' %}</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">{% trans 'Health' %}</a></li>
-                    <li class="nav-item"><a class="nav-link" href="">{% trans 'Financial' %}</a> </li>
-                    <li class="nav-item"><a class="nav-link" href="#">{% trans 'Buildings' %}</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="#"><span class="fas fa-tachometer-alt fa-fw"></span> {% trans 'Farm Overview' %} <span class="sr-only">(current)</span></a></li>
+                    <li class="nav-item"><a class="nav-link" href="#"><span class="fas fa-piggy-bank fa-fw"></span> {% trans 'Flocks' %}</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#"><span class="fas fa-utensils fa-fw"></span> {% trans 'Feeding' %}</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#"><span class="fas fa-notes-medical fa-fw"></span> {% trans 'Health' %}</a></li>
+                    <li class="nav-item"><a class="nav-link" href=""><span class="fas fa-dollar-sign fa-fw"></span> {% trans 'Financial' %}</a> </li>
+                    <li class="nav-item"><a class="nav-link" href="#"><span class="fas fa-building fa-fw"></span> {% trans 'Buildings' %}</a></li>
                 </ul>
                 <ul class="flex-md-column flex-row navbar-nav justify-content-between">
-                    <li class="nav-item"><a class="nav-link disabled" href="">{% trans 'Reports' %}</a></li>
+                    <li class="nav-item"><a class="nav-link disabled" href=""><span class="fas fa-file-pdf fa-fw"></span> {% trans 'Reports' %}</a></li>
                 </ul>
             </div>
         </nav>
@@ -68,8 +69,8 @@
         <main class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item" aria-current="page">{% trans 'Dashboard' %}</li>
-                    <li class="breadcrumb-item active" aria-current="page">{% trans 'Farm Dashboard' %}</li>
+                    <li class="breadcrumb-item" aria-current="page">{% trans 'Farm Overview' %}</li>
+                    <li class="breadcrumb-item active" aria-current="page">{% trans 'Overview' %}</li>
                 </ol>
             </nav>
             {% block main_content %}
@@ -77,7 +78,7 @@
         </main>
         <footer class="footer">
             <div class="mr">
-                <p class="text-muted">EasyFat v0.2.5</p>
+                <p class="text-muted">EasyFat v0.3.0</p>
             </div>
         </footer>
     </div>
