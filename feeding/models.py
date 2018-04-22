@@ -10,13 +10,18 @@ class FeedType(models.Model):
     def __str__(self):
         return self.name
 
-    @property
-    def remaining_weight(self):
-        last_entries = self.feedentry_set.order_by('date')
-        if last_entries.count() == 0:
-            return 0
+    def get_average_consumption(self, start_date=None, end_date=datetime.today().date()):
+        last_date = end_date
+        if start_date:
+            first_date = start_date
         else:
-            return self.__get_remaining_weight()
+            first_date = self.feedentry_set.order_by('date').first()
+            first_date = first_date.date
+
+        weight = self.feedentry_set.filter(date__lt=last_date)\
+            .filter(date__gte=first_date).aggregate(models.Sum('weight'))
+        days = (last_date - first_date).days
+        return weight['weight__sum'] / days
 
     @property
     def days_since_last_deliver(self):
@@ -30,32 +35,8 @@ class FeedType(models.Model):
         return None
 
     @property
-    def feed_end_date(self):
-        entry = self.feedentry_set.order_by('date').last()
-        if entry is not None:
-            return entry.date + timedelta(days=self.__get_average_entry_interval())
-        return None
-
-    def __get_average_entry_interval(self):
-        initial_date = datetime.now() - timedelta(days=365)     # look into past year.
-        found_entries = self.feedentry_set.filter(date__gt=initial_date).order_by('date')
-        interval_sum = 0
-
-        if found_entries.count() < 2:
-            return 14
-
-        for entry, next_entry in zip(found_entries, found_entries[1:]):
-            delta = next_entry.date - entry.date
-            interval_sum += delta.days
-
-        return interval_sum / (found_entries.count()-1)
-
-    def __get_remaining_weight(self):
-        average_entry_interval = self.__get_average_entry_interval()
-        last_entry = self.feedentry_set.order_by('date').last()
-        remaining_time = average_entry_interval - self.days_since_last_deliver
-        return max(0.0, last_entry.weight * remaining_time / average_entry_interval)
-
+    def average_consumption(self):
+        return self.get_average_consumption()
 
 class FeedEntry(models.Model):
     date = models.DateField()
