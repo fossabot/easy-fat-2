@@ -73,6 +73,9 @@ class RoomTestCase(TestCase):
         animal_days = self.room.get_animal_days_for_period(date(2016, 12, 1), date(2017, 1, 7))
         self.assertEqual(54, animal_days)
 
+    def test_str_function(self):
+        self.assertEqual('TheBigBuilding - Room1', self.room.__str__())
+
 
 class BuildingLayoutInformation(TestCase):
 
@@ -87,7 +90,7 @@ class BuildingLayoutInformation(TestCase):
         self.room2.save()
         self.room3 = Room(group=self.room_group, name='Room 3', capacity=10)
         self.room3.save()
-        self.silo1 = self.building.silo_set.create(capacity=10000)
+        self.silo1 = self.building.silo_set.create(capacity=10000, name='Silo1')
         self.silo1.save()
         self.silo2 = self.building.silo_set.create(capacity=20000)
         self.room1.animalroomentry_set.create(number_of_animals=10, date='2017-01-01')
@@ -103,3 +106,7 @@ class BuildingLayoutInformation(TestCase):
 
     def test_occupancy(self):
         self.assertEqual(10, self.building.occupancy)
+
+    def test_str_function(self):
+        self.assertEqual('TheBigBuilding', self.building.__str__())
+        self.assertEqual('Silo1', self.silo1.__str__())
