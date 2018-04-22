@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'flocks',
     'farm',
+    'feeding',
     'easy-fat-ui'
 ]
 
