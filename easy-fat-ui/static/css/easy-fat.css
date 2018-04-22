@@ -1,0 +1,15 @@
+.kpi .card-body-icon {
+  position: absolute;
+  z-index: 0;
+  top: -10px;
+  right: 15px;
+  font-size: 4rem;
+  -webkit-transform: rotate(0);
+  -ms-transform: rotate(0);
+  transform: rotate(0);
+}
+
+.kpi.card-body {
+    padding-top: 0;
+    padding-bottom: 0;
+}

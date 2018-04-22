@@ -4,90 +4,121 @@
 {% get_current_language as LANGUAGE_CODE %}
 
 
+<!DOCTYPE html>
+<html lang="en">
+
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-
-    <title>{% block title %}Chácara Ventania{% endblock %}</title>
+    <title>Easy-Fat</title>
+    <!-- Bootstrap core CSS-->
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" />
-    <link rel="stylesheet" type="text/css" href="static/dashboard.css" />
-    <link rel="shortcut icon" type="image/png" href="{% static 'porco.png' %}"/>
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css" integrity="sha384-+d0P83n9kaQMCwj8F4RJB66tzIwOKmrdb46+porD/OvrJ+37WqIM7UoBtwHO6Nlg" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="static/css/sb-admin.css" />
+    <link rel="stylesheet" type="text/css" href="static/css/easy-fat.css" />
+    <link rel="shortcut icon" type="image/png" href="{% static 'img/porco.png' %}"/>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css" integrity="sha384-+d0P83n9kaQMCwj8F4RJB66tzIwOKmrdb46+porD/OvrJ+37WqIM7UoBtwHO6Nlg" crossorigin="anonymous"/>
 </head>
 
-<nav class="navbar navbar-easyfat-dark navbar-expand sticky-top flex-md-nowrap p-0">
-
-    <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="{% url 'farm:index' %}"><img src="{% static 'porco.png' %}" style="width: 40px;"/> EasyFat</a>
-    <div id="navbar" class="navbar-collapse collapse">
+<body class="fixed-nav sticky-footer bg-dark" id="page-top">
+<!-- Navigation-->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
+    <a class="navbar-brand" href="index.html"><img src="{% static 'porco.png' %}" style="width: 32px; margin-bottom: 5px"/> <span>EasyFat</span></a>
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav navbar-sidenav collapse" id="exampleAccordion">
+            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
+                <a class="nav-link" href="#">
+                    <span class="fas fa-tachometer-alt fa-fw"></span><span class="nav-link-text"> {% trans 'Farm Overview' %}</span>
+                </a>
+            </li>
+            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">
+                <a class="nav-link" href="#">
+                    <span class="fas fa-piggy-bank fa-fw"></span>
+                    <span class="nav-link-text">Flocks</span>
+                </a>
+            </li>
+            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Tables">
+                <a class="nav-link" href="#">
+                    <span class="fas fa-utensils fa-fw"></span>
+                    <span class="nav-link-text">Feeding</span>
+                </a>
+            </li>
+            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Components">
+                <a class="nav-link" href="#">
+                    <span class="fas fa-notes-medical fa-fw"></span>
+                    <span class="nav-link-text">{% trans 'Medical' %}</span>
+                </a>
+            </li>
+            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Components">
+                <a class="nav-link disabled" href="#">
+                    <span class="fas fa-dollar-sign fa-fw"></span>
+                    <span class="nav-link-text">{% trans 'Financial' %}</span>
+                </a>
+            </li>
+            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Components">
+                <a class="nav-link" href="#">
+                    <span class="fas fa-file fa-fw"></span>
+                    <span class="nav-link-text">{% trans 'Reports' %}</span>
+                </a>
+            </li>
+        </ul>
+        <ul class="navbar-nav sidenav-toggler">
+            <li class="nav-item">
+                <a class="nav-link text-center" id="sidenavToggler" data-toggle="collapse" data-target="#exampleAccordion">
+                    <i class="fa fa-fw fa-angle-left"></i>
+                </a>
+            </li>
+        </ul>
         <ul class="navbar-nav ml-auto">
-{#            <li class="nav-item"><a class="nav-link" href="#"><span class="fas fa-cog"></span> Settings</a></li>#}
-{#            <li class="nav-item"><a class="nav-link" href="#"><span class="fas fa-user"></span> Profile {{ LANGUAGE_CODE }} </a></li>#}
-{#            <li class="nav-item"><a class="nav-link" href="#"><span class="fas fa-question-circle"></span> Help</a>#}
-            <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-expanded="false">Actions</a>
-                <div class="dropdown-menu dropdown-menu-right">
-                    <a class="dropdown-item" href="#"><span class="fas fa-piggy-bank fa-fw"></span> {% trans 'New Flock' %}</a>
-                    <a class="dropdown-item" href="#"><span class="fas fa-code-branch fa-fw"></span> {% trans 'New Separation' %}</a>
-                    <a class="dropdown-item" href="#"><span class="fas fa-truck-moving fa-fw"></span> {% trans 'New Group Exit' %}</a>
-                    <a class="dropdown-item" href="#"><span class="fas fa-truck fa-fw"></span> {% trans 'New Single Exit' %}</a>
-                    <a class="dropdown-item" href="#"><span class="fas fa-ambulance fa-fw"></span> {% trans 'New Death' %}</a>
-                    <a class="dropdown-item" href="#"><span class="fas fa-exchange-alt fa-fw"></span> {% trans 'New Transfer' %}</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#"><span class="fas fa-pallet fa-fw"></span> {% trans 'New Feed Delivery' %}</a>
-                    <a class="dropdown-item" href="#"><span class="fas fa-utensils fa-fw"></span> {% trans 'New Feeding Transition' %}</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#"><span class="fas fa-prescription-bottle fa-fw"></span> {% trans 'New Treatment' %}</a>
-                    <a class="dropdown-item disabled" href="test"><span class="fas fa-syringe fa-fw"></span> {% trans 'New Medication Application' %}</a>
-                </div>
+
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="modal" data-target="#exampleModal">
+                    <i class="fa fa-fw fa-sign-out"></i>Logout</a>
             </li>
         </ul>
     </div>
 </nav>
+<div class="content-wrapper">
+    <div class="container-fluid">
+        <!-- Breadcrumbs-->
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a href="index.html">Dashboard</a>
+            </li>
+        </ol>
 
-
-<div class="container-fluid">
-    <div class="row">
-        <nav class="col-md-2 d-none d-md-block bg-easyfat-light sidebar">
-            <div class="sidebar-sticky">
-                <ul class="flex-md-column flex-row navbar-nav justify-content-between">
-                    <li class="nav-item"><a class="nav-link active" href="#"><span class="fas fa-tachometer-alt fa-fw"></span> {% trans 'Farm Overview' %} <span class="sr-only">(current)</span></a></li>
-                    <li class="nav-item"><a class="nav-link" href="#"><span class="fas fa-piggy-bank fa-fw"></span> {% trans 'Flocks' %}</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#"><span class="fas fa-utensils fa-fw"></span> {% trans 'Feeding' %}</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#"><span class="fas fa-notes-medical fa-fw"></span> {% trans 'Health' %}</a></li>
-                    <li class="nav-item"><a class="nav-link" href=""><span class="fas fa-dollar-sign fa-fw"></span> {% trans 'Financial' %}</a> </li>
-                    <li class="nav-item"><a class="nav-link" href="#"><span class="fas fa-building fa-fw"></span> {% trans 'Buildings' %}</a></li>
-                </ul>
-                <ul class="flex-md-column flex-row navbar-nav justify-content-between">
-                    <li class="nav-item"><a class="nav-link disabled" href=""><span class="fas fa-file-pdf fa-fw"></span> {% trans 'Reports' %}</a></li>
-                </ul>
-            </div>
-        </nav>
-
-        <main class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
-            <nav aria-label="breadcrumb">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item" aria-current="page">{% trans 'Farm Overview' %}</li>
-                    <li class="breadcrumb-item active" aria-current="page">{% trans 'Overview' %}</li>
-                </ol>
-            </nav>
-            {% block main_content %}
-            {% endblock %}
-        </main>
-        <footer class="footer">
-            <div class="mr">
-                <p class="text-muted">EasyFat v0.3.0</p>
-            </div>
-        </footer>
+        <div class="row">
+                {% block main_content %}
+                {% endblock %}
+        </div>
     </div>
+    <!-- /.container-fluid-->
+    <!-- /.content-wrapper-->
+    <footer class="sticky-footer">
+        <div class="container">
+            <div class="text-right">
+                <small>Easy-fat v0.3.0</small>
+            </div>
+        </div>
+    </footer>
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fa fa-angle-up"></i>
+    </a>
+
+    <!-- Bootstrap core JavaScript-->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="{% static 'js/sb-admin.min.js'%}"></script>
 </div>
-
-
-
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-
 </body>
+
+</html>
