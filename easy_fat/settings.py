@@ -41,7 +41,8 @@ INSTALLED_APPS = [
     'flocks',
     'farm',
     'feeding',
-    'easy-fat-ui'
+    'easy-fat-ui',
+    'medical'
 ]
 
 MIDDLEWARE = [
