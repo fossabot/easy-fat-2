@@ -1,0 +1,52 @@
+{% load i18n %}
+{% load l10n %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>EasyFat - Login</title>
+    <!-- Bootstrap core CSS-->
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="{% static 'css/sb-admin.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'css/easy-fat.css' %}" />
+    <link rel="shortcut icon" type="image/png" href="{% static 'img/porco.png' %}"/>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css" integrity="sha384-+d0P83n9kaQMCwj8F4RJB66tzIwOKmrdb46+porD/OvrJ+37WqIM7UoBtwHO6Nlg" crossorigin="anonymous"/>
+</head>
+
+<body class="bg-dark">
+<div class="container">
+    <div class="card card-login mx-auto mt-5">
+        <div class="card-header">Login</div>
+        <div class="card-body">
+            <form class="login-form" method="post" action={% url 'login' %}>
+                {% csrf_token %}
+                {{ form.errors }}
+                <div class="form-group">
+                    <label for="id_username">Username</label>
+                    <input class="form-control" id="id_username" name="username" type="text" placeholder="Enter username">
+                </div>
+                <div class="form-group">
+                    <label for="id_password">Password</label>
+                    <input class="form-control" id="id_password" name="password" type="password" placeholder="Password">
+                </div>
+                <button class="btn btn-primary btn-block" type="submit">Login</button>
+            </form>
+            <div class="text-center">
+                <a class="d-block small mt-3 disabled" href="#">Forgot Password?</a>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Bootstrap core JavaScript-->
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</body>
+
+</html>
