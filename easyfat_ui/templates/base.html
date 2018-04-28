@@ -24,7 +24,7 @@
 <body class="fixed-nav sticky-footer bg-dark" id="page-top">
 <!-- Navigation-->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
-    <a class="navbar-brand" href="index.html"><img src="{% static 'img/porco.png' %}" style="width: 32px; margin-bottom: 5px"/> <span>EasyFat</span></a>
+    <a class="navbar-brand" href="{% url 'farm:index' %}"><img src="{% static 'img/porco.png' %}" style="width: 32px; margin-bottom: 5px"/> <span>EasyFat</span></a>
     <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
@@ -35,31 +35,31 @@
                     <span class="fas fa-tachometer-alt fa-fw"></span><span class="nav-link-text"> {% trans 'Farm Overview' %}</span>
                 </a>
             </li>
-            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">
+            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Flocks">
                 <a class="nav-link" href="#">
                     <span class="fas fa-piggy-bank fa-fw"></span>
                     <span class="nav-link-text">Flocks</span>
                 </a>
             </li>
-            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Tables">
+            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Feeding">
                 <a class="nav-link" href="#">
                     <span class="fas fa-utensils fa-fw"></span>
                     <span class="nav-link-text">Feeding</span>
                 </a>
             </li>
-            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Components">
+            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Medical">
                 <a class="nav-link" href="#">
                     <span class="fas fa-notes-medical fa-fw"></span>
                     <span class="nav-link-text">{% trans 'Medical' %}</span>
                 </a>
             </li>
-            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Components">
+            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Financial">
                 <a class="nav-link disabled" href="#">
                     <span class="fas fa-dollar-sign fa-fw"></span>
                     <span class="nav-link-text">{% trans 'Financial' %}</span>
                 </a>
             </li>
-            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Components">
+            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Reports">
                 <a class="nav-link" href="#">
                     <span class="fas fa-file fa-fw"></span>
                     <span class="nav-link-text">{% trans 'Reports' %}</span>
@@ -74,9 +74,27 @@
             </li>
         </ul>
         <ul class="navbar-nav ml-auto">
-            <li class="nav-item">
-                <a class="nav-link" href="{% url 'logout' %}?next=/login">
-                    <i class="fa fa-fw fa-sign-out"></i>Logout ({{request.user.username}})</a>
+            <li class="nav-item dropdown">
+                <a id="user-dropdown" class="nav-link dropdown-toggle mr-lg-2" href="#" data-toggle="dropdown">
+                    <span class="fas fa-fw fa-user"></span>
+                </a>
+                <div class="dropdown-menu dropdown-menu-right">
+                    <h6 class="dropdown-header">{{ request.user.username }}</h6>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="{% url 'accounts:index' %}">
+                        <span class="fas fa-fw fa-user-circle"></span>
+                        {% trans 'Profile' %}
+                    </a>
+                    <a class="dropdown-item" href="{% url 'logout' %}">
+                        <span class="fas fa-fw fa-cog"></span>
+                        {% trans 'Settings' %}
+                    </a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="{% url 'logout' %}">
+                        <span class="fas fa-fw fa-sign-out-alt"></span>
+                        {% trans 'Logout' %}
+                    </a>
+                </div>
             </li>
         </ul>
     </div>

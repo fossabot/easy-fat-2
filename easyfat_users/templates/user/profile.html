@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load l10n %}
+{% load static %}
+{% load kpi %}
+
+{% block page_header %}{% trans 'User Profile' %}{% endblock %}
+
+{% block main_content %}
+    <div class="row">
+        <div class="col-xl-4">
+            <div class="card">
+                <div class="card-header">
+                    {% trans 'General Information' %}
+                </div>
+                <div class="card-body">
+                    <ul>
+                        <li>{% trans 'Name: ' %}{{ profile.name }}</li>
+                        <li>{% trans 'Username: ' %}{{ profile.username }}</li>
+                        <li>{% trans 'Email: ' %}{{ profile.email }}</li>
+                        <li>{% trans 'Role: ' %}{{ profile.role }}</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-4">
+            <div class="card">
+                <div class="card-header">
+                    {% trans 'Farm Information' %}
+                </div>
+                {% if farms %}
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th scope="col">{% trans 'Farm' %}</th>
+                            <th scope="col">{% trans 'Relation' %}</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for farm in farms %}
+                            <tr>
+                                <td>{{ farm.name }}</td>
+                                <td>{{ farm.relation }}</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                {% else %}
+                    <div class="card-body">
+                        <a class="btn btn-primary" role="button" href="{% url 'farm:new_farm' %}">{% trans 'Register new farm' %}</a>
+                    </div>
+
+                {% endif %}
+
+            </div>
+        </div>
+    </div>
+{% endblock %}
