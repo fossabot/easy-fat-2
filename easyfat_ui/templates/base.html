@@ -85,15 +85,14 @@
     <div class="container-fluid">
         <!-- Breadcrumbs-->
         <ol class="breadcrumb">
+            {% for item in bread_crumbs %}
             <li class="breadcrumb-item">
-                <a href="index.html">Dashboard</a>
+                {{ item }}
             </li>
+            {% endfor %}
         </ol>
-
-        <div class="row">
-                {% block main_content %}
-                {% endblock %}
-        </div>
+        {% block main_content %}
+        {% endblock %}
     </div>
     <!-- /.container-fluid-->
     <!-- /.content-wrapper-->

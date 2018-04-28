@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block main_content %}
+    <div class="col-sm-12 col-xl-4">
+        <div class="card">
+            <div class="card-header">
+                Step {{ wizard.steps.step1 }} of {{ wizard.steps.count }}: {{ step_title }}
+            </div>
+            <div class="card-body">
+                {% for suggestion in suggestions %}
+                    <div class="alert alert-info">
+                        {{ suggestion }}
+                    </div>
+                {% endfor %}
+                <form action="{{ form_action }}" method="post">{% csrf_token %}
+                    {{ wizard.management_form }}
+
+                    {% include 'form.html' with form=wizard.form %}
+
+                    {% if wizard.steps.prev %}
+                        <button name="wizard_goto_step" type="submit" value="{{ wizard.steps.prev }}">{% trans "prev step" %}</button>
+                    {% endif %}
+                    <input type="submit" value="{% trans "Submit" %}"/>
+                </form>
+                {% for warning in warnings %}
+                    <div class="alert alert-warning">
+                        {{ warning }}
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

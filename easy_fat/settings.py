@@ -39,11 +39,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'formtools',
     'buildings',
     'flocks',
     'farm',
     'feeding',
-    'easy-fat-ui',
+    'easyfat_ui',
     'medical'
 ]
 

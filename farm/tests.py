@@ -43,3 +43,17 @@ class OwnedFarmModelTest(TestCase):
 
     def test_owners_property(self):
         self.assertEqual(1, self.farm.owners.count())
+
+
+class NewFarmWizardTest(TestCase):
+
+    def setUp(self):
+        User.objects.create_user('temporary', 'temporary@gmail.com', 'temporary')
+        self.client.login(username='temporary', password='temporary')
+        self.response = self.client.get('/new_farm')
+
+    def test_bread_crumbs(self):
+        self.assertEquals(['Farm Wizards', 'New Farm'], self.response.context['bread_crumbs'])
+
+    def test_title(self):
+        self.assertEquals('New farm', self.response.context['wizard_title'])
