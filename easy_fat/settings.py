@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 LOGIN_REDIRECT_URL = '/'
 LOGIN_URL = 'login'
+LOGOUT_REDIRECT_URL = '/login'
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -45,6 +46,7 @@ INSTALLED_APPS = [
     'farm',
     'feeding',
     'easyfat_ui',
+    'easyfat_users',
     'medical'
 ]
 

@@ -12,6 +12,8 @@ class FarmIndexView(LoginRequiredMixin, TemplateView):
                     'action': '#',
                     'action_name': 'View Details'}
         data.update({'kpi_info': kpi_info})
+        data.update({'bread_crumbs': ['Dashboard']})
+
         return data
 
     template_name = "farm/index.html"

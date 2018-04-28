@@ -121,7 +121,7 @@ body.fixed-nav {
 #mainNav .navbar-collapse .navbar-nav > .nav-item.dropdown > .nav-link:after {
   float: right;
   width: auto;
-  content: '\f105';
+  content: '\f107';
   border: none;
   font-family: 'FontAwesome';
 }
@@ -134,7 +134,7 @@ body.fixed-nav {
 }
 
 #mainNav .navbar-collapse .navbar-nav > .nav-item.dropdown.show > .nav-link:after {
-  content: '\f107';
+  content: '\f0d7';
 }
 
 #mainNav .navbar-collapse .navbar-nav > .nav-item.dropdown .dropdown-menu > .dropdown-item > .dropdown-message {
